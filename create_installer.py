@@ -22,7 +22,7 @@ def create_icon():
             except:
                 font = ImageFont.load_default()
             
-            draw.text((80, 85), "TDT", fill=(255, 255, 255, 255), font=font)
+            draw.text((80, 85), "KHY", fill=(255, 255, 255, 255), font=font)
             
             # Lưu dưới dạng icon
             img.save('tdt_icon.ico', format='ICO', sizes=[(256, 256)])
@@ -64,13 +64,13 @@ def run_pyinstaller():
     print("\n--- Đang build ứng dụng bằng PyInstaller ---")
     try:
         # Tạo file spec nếu chưa có
-        if not os.path.exists("build_app.spec"):
+        if not os.path.exists("build_tonghop.spec"):
             spec_content = """# -*- mode: python ; coding: utf-8 -*-
 
 block_cipher = None
 
 a = Analysis(
-    ['ToolKhaoSatTDT.py'],
+    ['ToolKhaoSatTongHop.py'],
     pathex=[],
     binaries=[],
     datas=[('tdt_logo.png', '.')],
@@ -93,7 +93,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='TDT Survey Tool',
+    name='TDT Khảo Sát Tổng Hợp',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -109,9 +109,9 @@ exe = EXE(
     icon='tdt_icon.ico',
 )
 """
-            with open("build_app.spec", "w") as f:
+            with open("build_tonghop.spec", "w") as f:
                 f.write(spec_content)
-            print("✅ Tạo file build_app.spec thành công")
+            print("✅ Tạo file build_tonghop.spec thành công")
         
         # Xóa build cũ để đảm bảo build mới không bị ảnh hưởng
         if os.path.exists("build"):
@@ -120,7 +120,7 @@ exe = EXE(
             shutil.rmtree("dist")
         
         # Chạy PyInstaller với file spec
-        subprocess.run(["pyinstaller", "build_app.spec"], check=True)
+        subprocess.run(["pyinstaller", "build_tonghop.spec"], check=True)
         print("✅ Build PyInstaller thành công!")
         return True
     except subprocess.CalledProcessError as e:
@@ -152,11 +152,11 @@ def run_nsis():
             return False
         
         # Chạy NSIS để tạo installer
-        subprocess.run([nsis_path, "installer.nsi"], check=True)
+        subprocess.run([nsis_path, "installer_tonghop.nsi"], check=True)
         print("✅ Tạo installer thành công!")
         
         # Xác định đường dẫn đến file installer
-        installer_path = os.path.abspath("TDT_Survey_Tool_Setup.exe")
+        installer_path = os.path.abspath("TDT_KhaoSatTongHop_Setup.exe")
         
         if os.path.exists(installer_path):
             print(f"\n✅ Installer đã được tạo tại: {installer_path}")
@@ -174,12 +174,12 @@ def run_nsis():
 
 def main():
     """Hàm chính để chạy quá trình tạo installer"""
-    print("=== Bắt đầu quá trình tạo installer cho TDT Survey Tool ===\n")
+    print("=== Bắt đầu quá trình tạo installer cho TDT Khảo Sát Tổng Hợp ===\n")
     
     # Kiểm tra xem file chính có tồn tại không
-    if not os.path.exists("ToolKhaoSatTDT.py"):
-        print("❌ Không tìm thấy file ToolKhaoSatTDT.py!")
-        print("Vui lòng đảm bảo bạn đang chạy script này trong cùng thư mục với ToolKhaoSatTDT.py")
+    if not os.path.exists("ToolKhaoSatTongHop.py"):
+        print("❌ Không tìm thấy file ToolKhaoSatTongHop.py!")
+        print("Vui lòng đảm bảo bạn đang chạy script này trong cùng thư mục với ToolKhaoSatTongHop.py")
         return
     
     # Tạo icon nếu cần
