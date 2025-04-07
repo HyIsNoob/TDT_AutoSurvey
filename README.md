@@ -14,7 +14,7 @@
 
 **TDT Survey Tool** là giải pháp tự động hoá hoàn hảo cho quy trình khảo sát đánh giá giảng viên tại trường Đại học Tôn Đức Thắng. Công cụ giúp sinh viên tiết kiệm thời gian và đảm bảo tỷ lệ hoàn thành 100%.
 
-> *"Hoàn thành trong vài phút những gì thường mất hàng giờ"*
+> *"Hoàn thành trong vài phút những gì thường mất hàng phút <(")"*
 
 ## ✨ Tính năng chính
 
@@ -28,14 +28,18 @@
 
 ### 📦 Cách 1: Cài đặt từ Installer (Khuyên dùng)
 
-1. **Tải xuống** file installer từ [Trang Releases](https://github.com/HyIsNoob/TDTSurveyTool/releases)
+1. **Tải xuống** file installer từ một trong các nguồn sau:
+   - [Trang Releases GitHub](https://github.com/HyIsNoob/TDTSurveyTool/releases)
+   - [Google Drive](https://drive.google.com/file/d/1wzC9w6iX-qSq-YwlHxJmHx48oq56W7Z9/view?usp=sharing) ← *Link Drive cập nhật mới nhất*
+   
 2. **Chạy** file `TDT_Survey_Tool_Setup.exe`
 3. **Làm theo** các bước hướng dẫn để hoàn tất cài đặt
 
 ### ⚡ Cách 2: Chạy trực tiếp (Portable)
 
-1. **Tải xuống** file thực thi từ [Trang Releases](https://github.com/HyIsNoob/TDTSurveyTool/releases)
+1. **Tải xuống** file thực thi từ các link tải phía trên
 2. **Giải nén** (nếu cần) và chạy file `TDT Survey Tool.exe`
+
 
 ## 🔍 Hướng dẫn sử dụng chi tiết
 
@@ -58,7 +62,6 @@
 | Hệ điều hành | Windows 10 hoặc cao hơn |
 | Trình duyệt | Google Chrome (Phiên bản mới nhất) |
 | Kết nối | Internet ổn định |
-| RAM | 4GB hoặc cao hơn |
 
 ## ⚠️ Lưu ý quan trọng
 
@@ -68,19 +71,18 @@
 
 ## 📜 Giấy phép
 
-© 2023 Hy - Mọi quyền được bảo lưu
+© 2025 Hy - Mọi quyền được bảo lưu
 
 **Lưu ý**: Mã nguồn của công cụ này được bảo vệ và không phân phối công khai. Chỉ các phiên bản đã biên dịch được cung cấp.
 
 ## 📞 Liên hệ & Hỗ trợ
-
 Nếu bạn gặp vấn đề hoặc có đóng góp ý kiến:
 
 - 🌐 **GitHub**: Tạo issue tại [TDTSurveyTool](https://github.com/HyIsNoob/TDTSurveyTool/issues)
-- ✉️ **Email**: [your.email@example.com](mailto:your.email@example.com)
+- ✉️ **Email**: [khanghyomni@gmail.com](mailto:khanghyomni@gmail.com)
 
 ---
 
 <div align="center">
-  <p>Được phát triển với ❤️ bởi <b>Hy</b></p>
+  <p>Được phát triển bởi <b>Hy</b></p>
 </div>
