@@ -1,0 +1,21 @@
+# Loại trừ file mã nguồn chính
+ToolKhaoSatTDT.py
+
+# Loại trừ các file mã nguồn hỗ trợ
+*.py
+!create_installer.py
+!obfuscate_code.py
+
+# Loại trừ các file cấu hình và thông tin nhạy cảm
+config.txt
+*.log
+
+# Loại trừ các thư mục build
+build/
+dist/
+__pycache__/
+*.spec
+
+# Cho phép các file hướng dẫn
+!README.md
+!LICENSE
