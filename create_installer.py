@@ -151,23 +151,138 @@ def run_nsis():
             print("Bạn có thể tải NSIS tại: https://nsis.sourceforge.io/Download")
             return False
         
-        # Chạy NSIS để tạo installer
-        subprocess.run([nsis_path, "installer_tonghop.nsi"], check=True)
-        print("✅ Tạo installer thành công!")
-        
-        # Xác định đường dẫn đến file installer
-        installer_path = os.path.abspath("TDT_KhaoSatTongHop_Setup.exe")
-        
-        if os.path.exists(installer_path):
+        # Thử tạo installer với installer_tonghop.nsi trước
+        print("Đang thử sử dụng installer_tonghop.nsi...")
+        try:
+            subprocess.run([nsis_path, "installer_tonghop.nsi"], check=True)
+            print("✅ Tạo installer thành công!")
+            installer_path = os.path.abspath("TDT_KhaoSatTongHop_Setup.exe")
             print(f"\n✅ Installer đã được tạo tại: {installer_path}")
             return True
-        else:
-            print("❌ Không tìm thấy file installer sau khi build.")
-            return False
+        except subprocess.CalledProcessError:
+            print("⚠️ Không thể sử dụng installer_tonghop.nsi, đang thử simplified_installer.nsi...")
             
-    except subprocess.CalledProcessError as e:
-        print(f"❌ Lỗi khi chạy NSIS: {e}")
-        return False
+            # Nếu không có simplified_installer.nsi, tạo file
+            if not os.path.exists("simplified_installer.nsi"):
+                print("Đang tạo file simplified_installer.nsi...")
+                with open("simplified_installer.nsi", "w", encoding="utf-8") as f:
+                    f.write("""
+; TDT Khảo Sát Tổng Hợp Installer Script - Simplified version
+Unicode true
+
+!include "MUI2.nsh"
+!include "LogicLib.nsh"
+
+; Định nghĩa thông tin ứng dụng
+!define PRODUCT_NAME "TDT Khảo Sát Tổng Hợp"
+!define PRODUCT_VERSION "1.2"
+!define PRODUCT_PUBLISHER "Hy"
+!define PRODUCT_DIR_REGKEY "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\${PRODUCT_NAME}.exe"
+!define PRODUCT_UNINST_KEY "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\${PRODUCT_NAME}"
+
+; Giao diện
+!define MUI_ABORTWARNING
+!define MUI_ICON "${__FILEDIR__}\\tdt_icon.ico"
+!define MUI_UNICON "${__FILEDIR__}\\tdt_icon.ico"
+!define MUI_WELCOMEPAGE_TITLE "Chào mừng đến với trình cài đặt ${PRODUCT_NAME}"
+!define MUI_WELCOMEPAGE_TEXT "Trình cài đặt sẽ hướng dẫn bạn cài đặt ${PRODUCT_NAME}.$\\r$\\n$\\r$\\nKhuyến nghị đóng các ứng dụng khác trước khi tiếp tục."
+!define MUI_FINISHPAGE_RUN "$INSTDIR\\RunTDTKhaoSat.bat"
+!define MUI_FINISHPAGE_RUN_TEXT "Khởi động ${PRODUCT_NAME}"
+
+; Trang cài đặt
+!insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_LICENSE "${__FILEDIR__}\\license.txt"
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+!insertmacro MUI_PAGE_FINISH
+
+; Trang gỡ cài đặt
+!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_INSTFILES
+
+; Ngôn ngữ
+!insertmacro MUI_LANGUAGE "Vietnamese"
+
+; Thông tin output file
+OutFile "${__FILEDIR__}\\TDT_KhaoSatTongHop_Setup.exe"
+InstallDir "$PROGRAMFILES\\TDT Khao Sat Tong Hop"
+InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
+ShowInstDetails show
+ShowUnInstDetails show
+
+Section "Cài đặt chương trình" SEC01
+  SetOutPath "$INSTDIR"
+  
+  ; Kiểm tra Microsoft Edge
+  IfFileExists "$PROGRAMFILES\\Microsoft\\Edge\\Application\\msedge.exe" EdgeFound
+  IfFileExists "$PROGRAMFILES (x86)\\Microsoft\\Edge\\Application\\msedge.exe" EdgeFound
+  
+  MessageBox MB_YESNO|MB_ICONQUESTION "Microsoft Edge không được tìm thấy. Phần mềm yêu cầu Microsoft Edge để hoạt động chính xác.$\\r$\\n$\\r$\\nBạn có muốn mở trang tải Edge không?" IDNO EdgeSkip
+    ExecShell "open" "https://www.microsoft.com/vi-vn/edge"
+  EdgeSkip:
+  
+  EdgeFound:
+  ; Sao chép các file
+  File "${__FILEDIR__}\\dist\\TDTKhaoSatTongHop.exe"
+  File "${__FILEDIR__}\\tdt_logo.png"
+  File "${__FILEDIR__}\\license.txt"
+  
+  ; Tạo thư mục dữ liệu cho trình duyệt
+  CreateDirectory "$INSTDIR\\EdgeUserData"
+  
+  ; Tạo file batch để khởi chạy ứng dụng với tham số browser data directory
+  FileOpen $0 "$INSTDIR\\RunTDTKhaoSat.bat" w
+  FileWrite $0 "@echo off$\\r$\\n"
+  FileWrite $0 'start "" "$INSTDIR\\TDTKhaoSatTongHop.exe" --edge-user-data-dir="$INSTDIR\\EdgeUserData"$\\r$\\n'
+  FileClose $0
+  
+  ; Tạo shortcut
+  CreateDirectory "$SMPROGRAMS\\${PRODUCT_NAME}"
+  CreateShortCut "$SMPROGRAMS\\${PRODUCT_NAME}\\${PRODUCT_NAME}.lnk" "$INSTDIR\\RunTDTKhaoSat.bat" "" "$INSTDIR\\TDTKhaoSatTongHop.exe"
+  CreateShortCut "$DESKTOP\\${PRODUCT_NAME}.lnk" "$INSTDIR\\RunTDTKhaoSat.bat" "" "$INSTDIR\\TDTKhaoSatTongHop.exe"
+  
+  ; Ghi thông tin vào registry
+  WriteUninstaller "$INSTDIR\\uninstall.exe"
+  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\\TDTKhaoSatTongHop.exe"
+  WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
+  WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\\uninstall.exe"
+  WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\\TDTKhaoSatTongHop.exe"
+  WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
+  WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
+SectionEnd
+
+Section "Uninstall"
+  ; Xóa shortcut
+  Delete "$SMPROGRAMS\\${PRODUCT_NAME}\\${PRODUCT_NAME}.lnk"
+  Delete "$DESKTOP\\${PRODUCT_NAME}.lnk"
+  RMDir "$SMPROGRAMS\\${PRODUCT_NAME}"
+  
+  ; Xóa file cài đặt
+  Delete "$INSTDIR\\TDTKhaoSatTongHop.exe"
+  Delete "$INSTDIR\\RunTDTKhaoSat.bat"
+  Delete "$INSTDIR\\tdt_logo.png"
+  Delete "$INSTDIR\\license.txt"
+  Delete "$INSTDIR\\uninstall.exe"
+  RMDir /r "$INSTDIR\\EdgeUserData"
+  RMDir "$INSTDIR"
+  
+  ; Xóa registry
+  DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
+  DeleteRegKey HKLM "${PRODUCT_UNINST_KEY}"
+SectionEnd
+""")
+            
+            # Thử chạy với simplified_installer.nsi
+            try:
+                subprocess.run([nsis_path, "simplified_installer.nsi"], check=True)
+                print("✅ Tạo installer thành công với simplified_installer.nsi!")
+                installer_path = os.path.abspath("TDT_KhaoSatTongHop_Setup.exe")
+                print(f"\n✅ Installer đã được tạo tại: {installer_path}")
+                return True
+            except subprocess.CalledProcessError as e:
+                print(f"❌ Không thể tạo installer: {e}")
+                return False
+                
     except Exception as e:
         print(f"❌ Lỗi không xác định khi tạo installer: {e}")
         return False

@@ -80,6 +80,8 @@
 
 ## ⚠️ Lưu ý quan trọng
 
+- Đảm bảo tất cả các file `.nsi` được lưu với mã hóa **UTF-8** và có dòng `Unicode true` ở đầu file.
+- Nếu gặp lỗi hiển thị tiếng Việt, hãy chạy `fix_encoding.bat` để sửa lỗi.
 - Tool chỉ hoạt động với tài khoản TDT hợp lệ
 - Không sử dụng tool cho mục đích xấu
 - Đảm bảo chỉ dùng tool khi thực sự hiểu về chất lượng giảng dạy

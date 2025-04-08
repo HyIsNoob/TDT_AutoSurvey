@@ -1,14 +1,33 @@
-GIẤY PHÉP SỬ DỤNG TDT SURVEY TOOL
+SOFTWARE LICENSE AGREEMENT FOR TDT SURVEY TOOL
 
-Phần mềm này được phát triển và sở hữu bởi Hy.
+This Software License Agreement (the "Agreement") is entered into between you (the "User") and Hy (the "Developer").
 
-ĐIỀU KHOẢN SỬ DỤNG:
+1. GRANT OF LICENSE
+   The Developer grants User a non-exclusive, non-transferable license to use the TDT Survey Tool software (the "Software") for personal use only.
 
-1. Bạn được phép cài đặt và sử dụng phần mềm này cho mục đích cá nhân.
-2. Bạn không được phép phân phối lại, sửa đổi, hoặc đảo ngược mã nguồn của phần mềm.
-3. Phần mềm này chỉ được sử dụng với mục đích hỗ trợ sinh viên trong việc hoàn thành khảo sát.
-4. Tác giả không chịu trách nhiệm với bất kỳ hậu quả nào phát sinh từ việc sử dụng phần mềm.
+2. RESTRICTIONS
+   User shall not:
+   (a) Distribute, sell, lease, rent, or sublicense the Software;
+   (b) Modify, reverse engineer, decompile, or disassemble the Software;
+   (c) Remove or alter any copyright, trademark or other proprietary notices from the Software;
+   (d) Use the Software for any illegal or unauthorized purpose.
 
-Bằng việc cài đặt và sử dụng phần mềm, bạn đã đồng ý với các điều khoản trên.
+3. OWNERSHIP
+   The Software is owned and copyrighted by the Developer. User's license confers no title or ownership in the Software.
 
-© 2025 Hy - Mọi quyền được bảo lưu
+4. DISCLAIMER OF WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. THE DEVELOPER MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+5. LIMITATION OF LIABILITY
+   IN NO EVENT SHALL THE DEVELOPER BE LIABLE FOR ANY DAMAGES WHATSOEVER ARISING OUT OF THE USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF THE DEVELOPER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+6. TERMINATION
+   This Agreement is effective until terminated. User may terminate it at any time by destroying all copies of the Software. It will also terminate if User fails to comply with any term or condition of this Agreement.
+
+7. GENERAL
+   This Agreement constitutes the entire agreement between User and Developer concerning the Software and supersedes any prior understanding or agreement.
+
+8. GOVERNING LAW
+   This Agreement shall be governed by and construed in accordance with the laws of Vietnam, without giving effect to any principles of conflicts of law.
+
+© 2025 Hy - All rights reserved

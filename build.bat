@@ -1,4 +1,5 @@
 @echo off
+chcp 65001 >nul
 echo ===== Building TDT Survey Tool =====
 
 echo 1. Cleaning old build files...

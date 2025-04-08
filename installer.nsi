@@ -1,4 +1,5 @@
 ; TDT Survey Tool Installer Script
+Unicode true
 
 !include "MUI2.nsh"
 !include "LogicLib.nsh"

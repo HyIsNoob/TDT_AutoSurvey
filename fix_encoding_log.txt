@@ -1,0 +1,23 @@
+Thời gian: Tue 04/08/2025  8:45:03.65 
+=== BẮT ĐẦU KIỂM TRA ENCODING === 
+Thư mục hiện tại: D:\fileluu\Tools\TDT_AutoSurvey 
+1. Đang tạo license.txt với encoding UTF-8... 
+Đã tạo bản backup license.txt.bak 
+Đã tạo license.txt thành công 
+2. Đang kiểm tra các file batch... 
+File hiện tại: fix_encoding.bat 
+Đang kiểm tra: build.bat 
+  [OK] File build.bat đã có lệnh chcp 65001 
+Đang kiểm tra: build_tonghop.bat 
+  [OK] File build_tonghop.bat đã có lệnh chcp 65001 
+3. Đang kiểm tra các file NSIS... 
+Đang kiểm tra: installer.nsi 
+  [OK] File installer.nsi đã có Unicode true 
+Đang kiểm tra: installer_tonghop.nsi 
+  [OK] File installer_tonghop.nsi đã có Unicode true 
+Đang kiểm tra: simplified_installer.nsi 
+  [OK] File simplified_installer.nsi đã có Unicode true 
+4. Kiểm tra đặc biệt cho simplified_installer.nsi... 
+  Số lượng Section "Uninstall": 1 
+  [OK] File simplified_installer.nsi chỉ có 1 Section "Uninstall" 
+=== Quá trình kiểm tra hoàn tất === 
